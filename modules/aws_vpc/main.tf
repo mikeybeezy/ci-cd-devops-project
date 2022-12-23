@@ -1,7 +1,8 @@
-resource "aws_subnet" "main" {
-  vpc_id     = var.vpc_id
-  cidr_block = var.cidr_block
+resource "aws_vpc" "main_vpc" {
+  cidr_block       = var.cidr_block
+  instance_tenancy = "default"
 
-  availability_zone = var.availability_zone
-  tags              = var.tags
+  tags = var.tags
 }
+
+

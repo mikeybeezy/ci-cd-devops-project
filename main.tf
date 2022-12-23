@@ -1,7 +1,11 @@
 module "vpc_module" {
   source     = "./modules/aws_vpc"
-  cidr_block = ""
-  tags       = ""
+  for_each   = var.vpc_config
+  cidr_block = each.value.cidr_block
+
+
+
+  tags = each.value.tags
 
 }
 
@@ -9,9 +13,10 @@ module "vpc_module" {
 
 module "aws_subnet" {
   source            = "./modules/aws_subnet"
-  availability_zone = ""
-  cidr_block        = ""
-  tags              = ""
-  vpc_id            = ""
+  for_each          = var.subnet_config
+  availability_zone = each.value.availability_zone
+  cidr_block        = each.value.cidr_block
+  tags              = each.value.tags
+  vpc_id            = module.vpc_module[each.value.vpc_name].vpc_id
 
 }

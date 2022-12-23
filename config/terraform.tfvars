@@ -1,4 +1,9 @@
 
+region = "us-east-1"
+
+access_key = ""
+
+secret_key = ""
 
 
 vpc_config = {
@@ -18,6 +23,7 @@ vpc_config = {
 subnet_config = {
 
   "public-us-east-1a" = {
+    vpc_name = "vpc01"
 
     cidr_block        = "192.168.0.0/18"
     availability_zone = "us-east-1a"
@@ -29,6 +35,7 @@ subnet_config = {
   }
 
   "public-us-east-1b" = {
+    vpc_name = "vpc01"
 
     cidr_block        = "192.168.64.0/18"
     availability_zone = "us-east-1b"
@@ -40,6 +47,7 @@ subnet_config = {
   }
 
   "private-us-east-1a" = {
+    vpc_name = "vpc01"
 
     cidr_block        = "192.168.128.0/18"
     availability_zone = "us-east-1a"
@@ -51,6 +59,7 @@ subnet_config = {
   }
 
   "private-us-east-1b" = {
+    vpc_name = "vpc01"
 
     cidr_block        = "192.168.192.0/18"
     availability_zone = "us-east-1b"
