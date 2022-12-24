@@ -72,3 +72,19 @@ subnet_config = {
 
 }
 
+
+
+internet_gateway_config = {
+
+}
+
+
+route_table_config = {
+
+}
+
+
+
+route_table_associations_config = {
+
+}

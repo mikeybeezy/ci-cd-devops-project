@@ -47,5 +47,35 @@ module "route_table_ass" {
 
   subnet_id      = ""
   route_table_id = ""
+  tags           = ""
 
 }
+
+
+module "elastic_ip" {
+  source = "./modules/aws_elastic_ip"
+
+  tags = ""
+
+
+}
+
+module "nat_gateway" {
+  source                   = "./modules/aws_natgateway"
+  subnet_id                = ""
+  elastic_ip_allocation_id = ""
+  tags                     = ""
+
+
+}
+
+
+variable "elastic_ip_allocation_id" {
+}
+
+variable "subnet_id" {
+}
+
+variable "tags" {
+}
+
