@@ -1,6 +1,10 @@
 variable "vpc_config" {}
 variable "subnet_config" {}
-
+variable "route_table_config" {}
+variable "route_table_associations_config" {}
+variable "elastic_IP_config" {}
+variable "nat_gateway_config" {}
+variable "internet_gateway_config" {}
 
 variable "region" {
 }
