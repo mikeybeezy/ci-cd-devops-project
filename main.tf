@@ -20,3 +20,32 @@ module "aws_subnet" {
   vpc_id            = module.vpc_module[each.value.vpc_name].vpc_id
 
 }
+
+
+
+module "internet_gateway" {
+  source = "./modules/aws_igw"
+
+  vpc_id = ""
+  tags   = ""
+}
+
+
+module "route_table" {
+  source = "./modules/aws_route_table"
+  vpc_id = ""
+  tags   = ""
+  igw_id = ""
+
+
+}
+
+
+
+module "route_table_ass" {
+  source = "./modules/aws_route_table_ass"
+
+  subnet_id      = ""
+  route_table_id = ""
+
+}

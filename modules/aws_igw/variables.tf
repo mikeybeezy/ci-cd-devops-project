@@ -1,4 +1,4 @@
-variable "main_gw" {
+variable "tags" {
 }
 
 variable "vpc_id" {
