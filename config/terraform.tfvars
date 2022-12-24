@@ -127,14 +127,16 @@ nat_gateway_config = {
 route_table_config = {
 
   RT01 = {
+    private      = 0
     vpc_name     = "vpc01"
-    gateway_name = ""
+    gateway_name = "igw01"
     tags = {
       "Name" = "public_route"
     }
 
   }
-  RT01 = {
+  RT02 = {
+    private      = 1
     vpc_name     = "vpc01"
     gateway_name = "natGW01"
     tags = {
@@ -145,6 +147,7 @@ route_table_config = {
   }
 
   RT03 = {
+    private      = 1
     vpc_name     = "vpc01"
     gateway_name = "natGW02"
     tags = {
