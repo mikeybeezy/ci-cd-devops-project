@@ -73,20 +73,7 @@ subnet_config = {
 }
 
 
-
-internet_gateway_config = {
-  igw01 = {
-    vpc_name = "vpc01"
-    tags = {
-      "Name" = "Main_IGW"
-    }
-  }
-
-
-}
-
-
-
+#Elastic IP config 
 elastic_IP_config = {
 
   eip01 = {
@@ -104,6 +91,7 @@ elastic_IP_config = {
 
 }
 
+# NAT Gateway Name 
 nat_gateway_config = {
   natgw01 = {
 
@@ -114,7 +102,7 @@ nat_gateway_config = {
     }
   }
 
-  natgw01 = {
+  natgw02 = {
 
     eip_name    = "eip02"
     subnet_name = "public-eu-west-1b"
@@ -124,6 +112,21 @@ nat_gateway_config = {
   }
 
 }
+
+# Internet Gateway Config
+internet_gateway_config = {
+  igw01 = {
+    vpc_name = "vpc01"
+    tags = {
+      "Name" = "Main_IGW"
+    }
+  }
+
+
+}
+
+
+# Route Table Config
 route_table_config = {
 
   RT01 = {
@@ -138,7 +141,7 @@ route_table_config = {
   RT02 = {
     private      = 1
     vpc_name     = "vpc01"
-    gateway_name = "natGW01"
+    gateway_name = "natgw01"
     tags = {
       "Name" = "private_route"
     }
@@ -149,7 +152,7 @@ route_table_config = {
   RT03 = {
     private      = 1
     vpc_name     = "vpc01"
-    gateway_name = "natGW02"
+    gateway_name = "natgw02"
     tags = {
       "Name" = "private_route"
     }
@@ -160,12 +163,16 @@ route_table_config = {
 }
 
 
-
+# Royte Table Associations
 route_table_associations_config = {
   RT01Assocation = {
 
     subnet_name      = "public-eu-west-1a"
     route_table_name = "RT01"
+    tags = {
+      "Name" = "public_igw_rt01_assocation"
+    }
+
 
   }
 
@@ -173,6 +180,9 @@ route_table_associations_config = {
 
     subnet_name      = "public-eu-west-1a"
     route_table_name = "RT01"
+    tags = {
+      "Name" = "public_rt01_assocation"
+    }
 
   }
 
@@ -180,6 +190,9 @@ route_table_associations_config = {
 
     subnet_name      = "public-eu-west-1a"
     route_table_name = "RT02"
+    tags = {
+      "Name" = "public_rt02_assocation"
+    }
 
   }
 
