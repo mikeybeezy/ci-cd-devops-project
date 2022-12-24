@@ -24,18 +24,19 @@ module "aws_subnet" {
 
 
 module "internet_gateway" {
-  source = "./modules/aws_igw"
-
-  vpc_id = ""
-  tags   = ""
+  source   = "./modules/aws_igw"
+  for_each = var.subnet_config
+  vpc_id   = module.vpc_module[each.value.vpc_name].vpc_id
+  tags     = each.value.tags
 }
 
 
 module "route_table" {
-  source = "./modules/aws_route_table"
-  vpc_id = ""
-  tags   = ""
-  igw_id = ""
+  source   = "./modules/aws_route_table"
+  for_each = var.route_table_config
+  vpc_id   = module.vpc_module[each.value.vpc_name].vpc_id
+  igw_id   = each.value.private == 0 ? module.internet_gateway[each.value.gateway_name].internet_gateway_id : module.nat_gateway_config[each.value.gateway_name].natgateway_id
+  tags     = var.tags
 
 
 }
@@ -43,28 +44,30 @@ module "route_table" {
 
 
 module "route_table_ass" {
-  source = "./modules/aws_route_table_ass"
-
+  source         = "./modules/aws_route_table_ass"
+  for_each       = var.route_table_associations_config
   subnet_id      = ""
-  route_table_id = ""
-  tags           = ""
+  route_table_id = module.route_table[each.value.route_table_name].route_table_id
+  tags           = var.tags
 
 }
 
 
 module "elastic_ip" {
-  source = "./modules/aws_elastic_ip"
-
-  tags = ""
+  source   = "./modules/aws_elastic_ip"
+  for_each = var.elastic_IP_config
+  tags     = each.value.tags
 
 
 }
 
 module "nat_gateway" {
+
   source                   = "./modules/aws_natgateway"
-  subnet_id                = ""
-  elastic_ip_allocation_id = ""
-  tags                     = ""
+  for_each                 = var.nat_gateway_config
+  subnet_id                = module.aws_subnet[each.value.subnet_name].main_subnet
+  elastic_ip_allocation_id = module.elastic_ip[for_each.value.eip_name].elastic_ip_id
+  tags                     = each.value.tags
 
 
 }
