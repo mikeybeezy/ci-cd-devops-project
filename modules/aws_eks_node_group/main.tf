@@ -13,9 +13,9 @@ resource "aws_eks_node_group" "eks_node_group_definition" {
 
   update_config {
     max_unavailable = var.max_unavailable
-    instance_type   = var.instance_type
-    ami_type        = var.ami_type
   }
+
+  ami_type = var.ami_type
 
   instance_types = ["t2.micro", "t2.medium"]
 

@@ -83,12 +83,17 @@ module "aws_eks" {
 
 
 module "aws_eks_node_group" {
-  source          = "./modules/aws_eks_node_group"
-  for_each        = var.aws_eks_node_group_config
-  cluster_name    = module.aws_eks.eks_cluster_name
-  node_group_name = each.value.node_group_name
-  node_iam_role   = each.value.node_iam_role
-  subnet_ids      = [module.aws_subnet[each.value.subnet1].subnet_id, module.aws_subnet[each.value.subnet2].subnet_id]
-  tags            = each.value.tags
+  source           = "./modules/aws_eks_node_group"
+  for_each         = var.aws_eks_node_group_config
+  eks_cluster_name = module.aws_eks[each.value.eks_cluster_name].eks_cluster
+  node_iam_role    = each.value.node_iam_role
+  subnet_ids       = [module.aws_subnet[each.value.subnet1].subnet_id, module.aws_subnet[each.value.subnet2].subnet_id]
+  tags             = each.value.tags
 
 }
+
+
+
+
+
+#   eks_cluster_name = module.aws_eks[each.value.eks_cluster_name].eks_cluster

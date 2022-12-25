@@ -211,7 +211,7 @@ route_table_associations_config = {
 aws_eks_config = {
 
   "aws_eks_config_v1" = {
-    eks_cluster_name = " dev-cluster"
+    eks_cluster_name = "dev-cluster"
     subnet1          = "public-eu-west-1a"
     subnet2          = "public-eu-west-1b"
     subnet3          = "private-eu-west-1a"
@@ -235,10 +235,6 @@ aws_eks_node_group_config = {
     node_iam_role    = "eks-node-general-1"
     subnet1          = "private-eu-west-1a"
     subnet2          = "private-eu-west-1b"
-
-    tags = {
-      "Name" = "nodegroup1"
-    }
   }
 
   "node_group_2" = {
@@ -247,10 +243,10 @@ aws_eks_node_group_config = {
     node_iam_role    = "eks-node-general-1"
     subnet1          = "private-eu-west-1a"
     subnet2          = "private-eu-west-1b"
+  }
 
-    tags = {
-      "Name" = "nodegroup2"
-    }
+  tags = {
+    "Name" = "nodes"
   }
 
 
