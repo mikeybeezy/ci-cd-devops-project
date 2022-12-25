@@ -76,18 +76,19 @@ module "aws_eks" {
   source           = "./modules/aws_eks"
   for_each         = var.aws_eks_config
   eks_cluster_name = each.value.eks_cluster_name
-  subnet_ids       = [module.aws_subnet[each.value.subnet1].subnet_id, module.aws_subnet[each.value.subnet2].subnet_id, module.aws_subnet[each.value.subnet3].subnet_id, module.aws_subnet[each.value.subnet4].subnet_id]
+  subnet_ids       = [module.aws_subnet[each.value.subnet1].main_subnet, module.aws_subnet[each.value.subnet2].main_subnet, module.aws_subnet[each.value.subnet3].main_subnet, module.aws_subnet[each.value.subnet4].main_subnet]
   tags             = each.value.tags
 
 }
 
-
+#   subnet_id      = module.aws_subnet[each.value.subnet_name].main_subnet
 module "aws_eks_node_group" {
   source           = "./modules/aws_eks_node_group"
   for_each         = var.aws_eks_node_group_config
+  node_group_name  = each.value.node_group_name
   eks_cluster_name = module.aws_eks[each.value.eks_cluster_name].eks_cluster
   node_iam_role    = each.value.node_iam_role
-  subnet_ids       = [module.aws_subnet[each.value.subnet1].subnet_id, module.aws_subnet[each.value.subnet2].subnet_id]
+  subnet_ids       = [module.aws_subnet[each.value.subnet1].main_subnet, module.aws_subnet[each.value.subnet2].main_subnet]
   tags             = each.value.tags
 
 }

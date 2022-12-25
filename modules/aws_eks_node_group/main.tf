@@ -1,6 +1,6 @@
 
 resource "aws_eks_node_group" "eks_node_group_definition" {
-  cluster_name    = var.cluster_name
+  cluster_name    = var.eks_cluster_name
   node_group_name = var.node_group_name
   node_role_arn   = aws_iam_role.eks_node_group_iam_role.arn
   subnet_ids      = var.subnet_ids
@@ -15,7 +15,7 @@ resource "aws_eks_node_group" "eks_node_group_definition" {
     max_unavailable = var.max_unavailable
   }
 
-  ami_type = var.ami_type
+  # ami_type = var.ami_type
 
   instance_types = ["t2.micro", "t2.medium"]
 
@@ -32,7 +32,7 @@ resource "aws_eks_node_group" "eks_node_group_definition" {
 
 
 resource "aws_iam_role" "eks_node_group_iam_role" {
-  name = var.node_iam_role
+  name = var.node_group_name
 
   assume_role_policy = jsonencode({
     Statement = [{

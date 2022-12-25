@@ -216,12 +216,12 @@ aws_eks_config = {
     subnet2          = "public-eu-west-1b"
     subnet3          = "private-eu-west-1a"
     subnet4          = "private-eu-west-1b"
+    tags = {
+      "Name" = "subnets"
+    }
+
   }
 
-  tags = {
-    "Name" = "aws_eks_cluster_v1"
-
-  }
 
 
 }
@@ -235,6 +235,9 @@ aws_eks_node_group_config = {
     node_iam_role    = "eks-node-general-1"
     subnet1          = "private-eu-west-1a"
     subnet2          = "private-eu-west-1b"
+    tags = {
+      "Name" = "node_group_1"
+    }
   }
 
   "node_group_2" = {
@@ -243,10 +246,9 @@ aws_eks_node_group_config = {
     node_iam_role    = "eks-node-general-1"
     subnet1          = "private-eu-west-1a"
     subnet2          = "private-eu-west-1b"
-  }
-
-  tags = {
-    "Name" = "nodes"
+    tags = {
+      "Name" = "node_group_2"
+    }
   }
 
 
