@@ -205,3 +205,53 @@ route_table_associations_config = {
 
 }
 
+
+# EKS Config 
+
+aws_eks_config = {
+
+  "aws_eks_config_v1" = {
+    eks_cluster_name = " dev-cluster"
+    subnet1          = "public-eu-west-1a"
+    subnet2          = "public-eu-west-1b"
+    subnet3          = "private-eu-west-1a"
+    subnet4          = "private-eu-west-1b"
+  }
+
+  tags = {
+    "Name" = "aws_eks_cluster_v1"
+
+  }
+
+
+}
+
+
+aws_eks_node_group_config = {
+
+  "node_group_1" = {
+    node_group_name  = "app_node_group_1"
+    eks_cluster_name = "aws_eks_config_v1"
+    node_iam_role    = "eks-node-general-1"
+    subnet1          = "private-eu-west-1a"
+    subnet2          = "private-eu-west-1b"
+
+    tags = {
+      "Name" = "nodegroup1"
+    }
+  }
+
+  "node_group_2" = {
+    node_group_name  = "tools_node_group_1"
+    eks_cluster_name = "aws_eks_config_v1"
+    node_iam_role    = "eks-node-general-1"
+    subnet1          = "private-eu-west-1a"
+    subnet2          = "private-eu-west-1b"
+
+    tags = {
+      "Name" = "nodegroup2"
+    }
+  }
+
+
+}
